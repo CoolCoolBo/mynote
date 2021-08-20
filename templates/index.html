@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首 页</title>
+</head>
+<body>
+   <h1>这是mynote的首页！</h1> 
+   {% if request.session.username %}
+    <h2>欢迎您：{{ request.session.username }}</h2>
+    <p>
+       <a href="/user/logoff">退出登录</a>
+    </p>
+    <p>
+       <a href="/note/all">进入我的笔记</a>
+    </p>
+   {% else %}
+        {% if request.COOKIES.username %}
+            <h2>欢迎您：{{ request.session.username }}</h2>
+            <p>
+            <a href="/user/logoff">退出登录</a>
+            </p>
+            <p>
+            <a href="">进入我的笔记</a>
+            </p>
+        {% else %}
+            <p>
+                <a href="/user/login">登 录</a>
+            </p>
+            <p>
+                <a href="/user/reg">注 册</a>
+            </p>
+        {% endif %}
+   {% endif %}
+</body>
+</html>

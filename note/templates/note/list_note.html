@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的笔记</title>
+</head>
+<body>
+    {% if request.session.username %}
+        <p>{{ request.session.username }}的笔记 <a href="/note/add_note">添加新笔记</a>   <a href="/index">返回首页</a></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>创建时间</th>
+                <th>修改时间</th>
+                <th>修改</th>
+                <th>删除</th>
+            </tr>
+            {% for note in notes %}
+                <tr>
+                    <td>{{ note.id}}</td>
+                    <td>{{ note.title}}</td>
+                    <td>{{ note.created_time }}</td>
+                    <td>{{ note.updated_time }}</td>
+                    <td>
+                        <a href="/note/mod_note/{{ note.id }}">修改</a>
+                    </td>
+                    <td>
+                        <a href="">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        {% if request.COOKIES.username %}
+            <p>{{ request.session.username }}的笔记 <a href="/note/add_note">添加新笔记</a>   <a href="/index">返回首页</a></p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
+                {% for note in notes %}
+                    <tr>
+                        <td>{{ note.id}}</td>
+                        <td>{{ note.title}}</td>
+                        <td>{{ note.created_time }}</td>
+                        <td>{{ note.updated_time }}</td>
+                        <td>
+                            <a href="/note/mod_note/{{ note.id }}">修改</a>
+                        </td>
+                        <td>
+                            <a href="">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <a href="/user/login">请登录</a>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
